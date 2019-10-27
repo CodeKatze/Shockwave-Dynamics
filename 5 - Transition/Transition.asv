@@ -1,7 +1,13 @@
-gamma = 1.4;
-M0 = 2;
+p0 = 1;
+g = 1.4;
 
-phi1 = linspace(asind(1/M0),90,100);
+M0 = 1:0.1:5;
+
+for m = M0
+    guess = [1 , 1, 1, 1, 0.1, 0.1, 0.1 ,0.1];
+    x = fsolve(@(X)eqns(m,p0,g,X),guess);
+    x(7)
+end
 
 
 % phi = phifromtheta(m,theta_w,gamma);
