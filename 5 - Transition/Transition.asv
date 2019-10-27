@@ -1,0 +1,9 @@
+gamma = 1.4;
+M0 = 2;
+
+phi1 = linspace(asind(1/M0),90,100);
+
+
+% phi = phifromtheta(m,theta_w,gamma);
+
+% [Mj, ~, ~, ~, thetaj] = Shockfun(m,phi,gamma);
