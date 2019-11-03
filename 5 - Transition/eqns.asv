@@ -1,0 +1,22 @@
+function F = eqns(X)
+%UNTITLED3 Summary of this function goes here
+%   Detailed explanation goes here
+X = num2cell(X);
+[M0, M1, M2, P0, P1, P2, theta1, theta2, phi1, phi2, g] = X{:};
+
+F(1) = sqrt( (1 + (g-1)*(M0.*sind(phi1)).^2 + ( (g+1)^2/4 - g.*sind(phi1).^2 ).*(M0.^2.*sind(phi1)).^2)./(g*(M0.*sind(phi1)).^2 - (g-1)/2) ./ ((M0.*sind(phi1)).^2 +1) ) - M1;
+F(2) = 2/(g+1)*(g*(M0.*sind(phi1)).^2 - (g-1)/2) - P1/P0;
+% rhoj_rhoi = ( (g+1)*(Mi.*sind(phij)).^2 )/( (g-1)*(Mi.*sind(phij)).^2 +2 );
+% tj_ti = ( (g-1)*(Mi.*sind(phij)).^2 + ( (g+1)^2/4  - g*sind(phij).^2).*(Mi.^2.*sind(phij)).^2 )./ (g*(Mi.*sind(phij)).^2-(g-1)/2) ./ ((Mi.*sind(phij)).^2 +1) ;
+F(3) = atand(2*cotd(phi1).*((M0.*sind(phi1)).^2 - 1)/( M0.^2.*( g + cosd(2*phi1) ) + 2)) - theta1;
+
+F(4) = sqrt( (1 + (g-1)*(M0.*sind(phi1)).^2 + ( (g+1)^2/4 - g.*sind(phi1).^2 ).*(M0.^2.*sind(phi1)).^2)./(g*(M0.*sind(phi1)).^2 - (g-1)/2) ./ ((M0.*sind(phi1)).^2 +1) ) - M1;
+F() = 2/(g+1)*(g*(M0.*sind(phi1)).^2 - (g-1)/2) - P1/P0;
+% rhoj_rhoi = ( (g+1)*(Mi.*sind(phij)).^2 )/( (g-1)*(Mi.*sind(phij)).^2 +2 );
+% tj_ti = ( (g-1)*(Mi.*sind(phij)).^2 + ( (g+1)^2/4  - g*sind(phij).^2).*(Mi.^2.*sind(phij)).^2 )./ (g*(Mi.*sind(phij)).^2-(g-1)/2) ./ ((Mi.*sind(phij)).^2 +1) ;
+F(3) = atand(2*cotd(phi1).*((M0.*sind(phi1)).^2 - 1)/( M0.^2.*( g + cosd(2*phi1) ) + 2)) - theta1;
+
+theta1 = thetaMax(M1,g);
+theta2 = theta1;
+end
+

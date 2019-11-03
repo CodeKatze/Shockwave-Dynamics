@@ -1,7 +1,7 @@
 %Initial Conditions
 gamma = 1.4;
-M1 = 3;
-theta_w = 30;
+M1 = 1.6;
+theta_w = 14.2;
 
 %First Shock Polar
 phi = linspace(asind(1/M1),90,1000);
