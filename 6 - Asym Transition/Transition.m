@@ -25,7 +25,7 @@ for t = theta_wl
     end  
 end
 
-plot(theta_w1,thetawu_detach);
+plot(theta_wl,thetawu_detach);
 hold on;
 
 % guess = [1.1 , 0.5, 1.1, 1.1, 0.1, 0.2, 0.3 ,0.4];
