@@ -1,10 +1,10 @@
 %Initial Conditions
 gamma = 1.4;
-M1 = 1.6;
-theta_w = 10;
+M1 = 3;
+theta_w = 30;
 
 %First Shock Polar
-phi = linspace(asind(1/M1),90,100);
+phi = linspace(asind(1/M1),90,1000);
 p_po = 1 + 2*gamma/(gamma + 1) * ( (M1*sind(phi)).^2 -1);
 theta = atand(2*cotd(phi).*((M1*sind(phi)).^2 - 1)./(2 + M1^2*(gamma+cosd(2*phi))));
 x1 = [-1*flip(theta(2:length(theta))) theta];

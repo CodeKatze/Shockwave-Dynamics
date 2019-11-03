@@ -1,24 +1,39 @@
 p0 = 1;
 g = 1.4;
 
-M0 = 1:0.1:5;
-phi_detach = [];
-phi_vn = [];
-for m = M0
-    guess = [1 , 1, 1, 1, 0.1, 0.1, 0.1 ,0.1];
-    options=optimset('TolFun',.001,'MaxFunEvals',100000,'MaxIter',100000);
-    x = fsolve(@(X)eqns_Detach(X,m,p0,g),guess,options);
-    phi_detach = [phi_detach real(x(7))];
-end
-plot(M0,phi_detach);
-hold on;
-for m = M0
-    guess = [1 , 1, 1, 1, 1, 1, 0.1, 0.1, 0.1, 0.1 ,0.1, 0.1];
-    options=optimset('TolFun',.001,'MaxFunEvals',10000000,'MaxIter',10000000);
-    x = fsolve(@(X)eqns_Vn(X,m,p0,g),guess,options);
-    phi_vn = [phi_vn real(x(10))];
-end
-plot(M0,phi_vn);
-% phi = phifromtheta(m,theta_w,gamma);
+M0 = 1.1:0.1:5;
+theta_detach = [];
+theta_vn = [];
 
-% [Mj, ~, ~, ~, thetaj] = Shockfun(m,phi,gamma);
+options=optimset('TolFun',1e-10,'MaxFunEvals',1000000,'MaxIter',1000000);
+
+guess = [1.1 , 0.5, 1.1, 1.1, 0.1, 0.2, 0.3 ,0.4];
+for m = M0
+    lb = [0, 0, 0, 0,0.1,0.1,asind(1/m),asind(1/m)];
+    ub = [m, m, p0*m*100, p0*m*100,90, 90, 90, 90];
+    x = lsqnonlin(@(X)twoShockDetach(X,m,p0,g),guess,lb,ub,options);
+%     guess = real(x);
+    if imag(x(5)) == 0
+        guess = x;
+        theta_detach = [theta_detach x(5)];
+    else
+        theta_detach = [theta_detach 0];
+    end       
+end
+plot(M0,theta_detach);
+hold on;
+
+guess = [1.1 , 0.5, 1.1, 1.1, 0.1, 0.2, 0.3 ,0.4];
+for m = M0
+    lb = [0, 0, 0, 0,0.1,0.1,asind(1/m),asind(1/m)];
+    ub = [m, m, p0*m*100, p0*m*100,90, 90, 90, 90];
+    x = lsqnonlin(@(X)twoShockVN(X,m,p0,g),guess,lb,ub,options);
+%     guess = real(x);
+    if imag(x(5)) == 0
+        guess = x;
+        theta_vn = [theta_vn x(5)];
+    else
+        theta_vn = [theta_vn 0];
+    end       
+end
+plot(M0,theta_vn);
