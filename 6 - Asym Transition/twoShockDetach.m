@@ -34,7 +34,8 @@ F(10) = sqrt((1 + (g-1)/2*(M1l.*sind(phi2l)).^2 )./(g*(M1l.*sind(phi2l)).^2 - (g
 F(11) = 1+ 2*g/(g+1)*((M1l.*sind(phi2l)).^2 -1) - P2l/P1l;
 F(12) = atand(2*cotd(phi2l).*((M1l.*sind(phi2l)).^2 - 1)/( M1l.^2.*( g + cosd(2*phi2l) ) + 2)) - theta2l;
 
-F(13) = theta1u - theta2u - theta1l + theta2l;
+F(13) = theta1u - theta2u + theta1l - theta2l;
 F(14) = P2l - P2u;
 F(15) = theta2u - thetaMax(M1u,g);
+F(16) = theta2l - thetaMax(M1l,g);
 end
