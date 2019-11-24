@@ -7,6 +7,7 @@ thetawu_VN = [];
 
 
 theta_wl = 0.1:0.1:thetaMax(M0,g);
+theta_wl = 5:0.1:32;
 options=optimset('TolFun',1e-10,'MaxFunEvals',1000000,'MaxIter',1000000);
 
 guess = [1.1, 0.5, 1.1, 1.1, 0.1, 0.2, 0.3, 0.4, 1.1, 0.5, 1.1, 1.1, 0.11, 0.21, 0.31];
@@ -43,3 +44,7 @@ for t = theta_wl
 end
 
 plot(theta_wl,thetawu_VN);
+title('Asymmetric Transition Criteria');
+xlabel('Lower Wedge Angle, \theta_{wl}');
+ylabel('Upper Wedge Angle, \theta_{wu}');
+legend('Detachment','von-Neumann');

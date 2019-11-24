@@ -1,10 +1,10 @@
 %Initial Conditions
 gamma = 1.4;
-M1 = 2.8;
-theta_w = 22;
+M1 = 2.84;
+theta_w = 19.17;
 
 %First Shock Polar
-phi = linspace(asind(1/M1),90,1000);
+phi = linspace(asind(1/M1),90,100);
 p_po = 1 + 2*gamma/(gamma + 1) * ( (M1*sind(phi)).^2 -1);
 theta = atand(2*cotd(phi).*((M1*sind(phi)).^2 - 1)./(2 + M1^2*(gamma+cosd(2*phi))));
 x1 = [-1*flip(theta(2:length(theta))) theta];
@@ -33,7 +33,7 @@ plot(x2 + theta_1,y2, x2 - theta_1,y2);
 y = [0 p_po(end)*1.92];
 plot([0 0],y,'k');
 
-title('Shock Polar');
+title(['Shock Polar for M_0 = ' num2str(M1) ' and \theta_{wedge} = ' num2str(theta_w) '^o']);
 xlabel('Flow Deflection, \theta');
 ylabel('P_j/P_o');
 
@@ -41,8 +41,15 @@ ylabel('P_j/P_o');
 
 if isempty(x_rr)
     [x_mr, y_mr] =  intersections(x2 + theta_1,y2,x1,y1);
-    plot(x_mr,y_mr,'o');
-    plot(-x_mr,y_mr,'o');
+    [~, n] = max(y_mr);
+%     for n = 1:length(y_mr)
+%         if p_po_1 < y_mr(n)
+            plot(x_mr(n), y_mr(n),'o');
+            plot(-x_mr(n), y_mr(n),'o');
+            text(x_mr(n), y_mr(n)*1.1,['(' num2str(x_mr(n)) ',' num2str(y_mr(n)) ')']);
+            
+%         end
+%     end
 else  
     plot(x_rr, y_rr,'o');
 end
